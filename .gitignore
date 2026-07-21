@@ -1,0 +1,9 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+projects/ds003626/
+projects/Inner_Speech_Dataset/
+projects/tribev2/
+results/phase-0/runs/
+.matplotlib/
