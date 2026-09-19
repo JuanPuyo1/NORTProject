@@ -1,4 +1,5 @@
 .venv/
+website/.env
 website/node_modules/
 website/db.sqlite3
 __pycache__/

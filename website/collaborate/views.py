@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse
 
 from .forms import CollaborationForm
+from .notifications import notify_new_inquiry
 
 
 def collaborate(request):
@@ -9,7 +10,8 @@ def collaborate(request):
     if request.method == "POST":
         form = CollaborationForm(request.POST)
         if form.is_valid():
-            form.save()
+            inquiry = form.save()
+            notify_new_inquiry(inquiry)
             if request.htmx:
                 return render(request, "collaborate/partials/success.html")
             return redirect(reverse("collaborate:success"))
