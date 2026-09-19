@@ -1,3 +1,13 @@
+"""
+Seed or update public lab notes from version-controlled definitions.
+
+Release flow (after an achievement on main):
+1. Merge main into prod.
+2. Add a new dict to POSTS below (unique slug, is_published via seed defaults).
+3. Push prod → GitHub Actions builds the image → VPS pulls and restarts.
+4. entrypoint runs seed_blog_posts on every container start (idempotent).
+"""
+
 from datetime import datetime
 
 from django.core.management.base import BaseCommand
@@ -75,6 +85,9 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         created = 0
         for data in POSTS:
+            if data.get("is_featured"):
+                BlogPost.objects.exclude(slug=data["slug"]).update(is_featured=False)
+
             published_at = timezone.make_aware(data["published_at"])
             post, was_created = BlogPost.objects.update_or_create(
                 slug=data["slug"],

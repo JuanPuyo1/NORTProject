@@ -82,7 +82,36 @@ Add repository secrets:
 - `DOCKERHUB_USERNAME`
 - `DOCKERHUB_TOKEN` (Docker Hub access token)
 
-Pushes to `main` that touch `website/` build and push:
+Pushes to **`prod`** that touch `website/` build and push:
 
 - `yourdockerhubuser/nort-website:latest`
 - `yourdockerhubuser/nort-website:<git-sha>`
+
+`main` is for research and project work; production deploys only from `prod`.
+
+## Releasing after an achievement on main
+
+1. Finish the milestone on **`main`** (wiki log, code, results).
+2. Merge into **`prod`**: `git checkout prod && git merge main`
+3. Add a public lab note in `blog/management/commands/seed_blog_posts.py` → `POSTS` list (new entry at the top, unique `slug`).
+4. Commit and push **`prod`**.
+5. GitHub Actions builds and pushes the Docker image.
+6. On the VPS (`/opt/nort`): `docker compose -f docker-compose.prod.yml pull && docker compose -f docker-compose.prod.yml up -d`
+
+On container start, `seed_blog_posts` runs automatically (creates new posts, updates existing slugs, sets one featured post). No manual admin step required unless you prefer it.
+
+### New post template
+
+```python
+{
+    "title": "Short public headline",
+    "slug": "unique-kebab-case-slug",
+    "category": BlogPost.Category.STATUS,  # software | hardware | methods | status
+    "published_at": datetime(2026, 9, 20, 12, 0),
+    "is_featured": True,  # only one; clears featured on other posts
+    "excerpt": "One or two sentences for cards and SEO.",
+    "content": """## Summary
+
+Public-facing write-up. Link to deeper wiki notes on main if useful.""",
+},
+```
