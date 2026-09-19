@@ -17,7 +17,7 @@ copy .env.example .env
 ..\.venv\Scripts\python manage.py seed_blog_posts
 ..\.venv\Scripts\python manage.py createsuperuser
 npm install
-npm run build:css
+npm run build
 ```
 
 ## Development

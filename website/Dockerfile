@@ -9,7 +9,7 @@ RUN npm ci
 
 COPY tailwind.config.js postcss.config.js ./
 COPY static ./static
-RUN npm run build:css
+RUN npm run build
 
 FROM python:3.13-slim AS runtime
 
@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 COPY --from=assets /app/static/css/site.css ./static/css/site.css
+COPY --from=assets /app/static/js/vendor ./static/js/vendor
 
 RUN SECRET_KEY=build-only-not-for-runtime \
     DEBUG=False \

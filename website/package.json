@@ -4,7 +4,14 @@
   "private": true,
   "scripts": {
     "build:css": "tailwindcss -i ./static/css/input.css -o ./static/css/site.css --minify",
+    "build:vendor": "node scripts/copy-vendor.mjs",
+    "build": "npm run build:css && npm run build:vendor",
+    "postinstall": "node scripts/copy-vendor.mjs",
     "watch:css": "tailwindcss -i ./static/css/input.css -o ./static/css/site.css --watch"
+  },
+  "dependencies": {
+    "alpinejs": "3.14.9",
+    "gsap": "3.13.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
