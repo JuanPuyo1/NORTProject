@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}NORT Project — Inner speech, measured from the outside{% endblock %}
+
+{% block content %}
+<section class="page-container flex flex-col items-center text-center pt-10 pb-8 lg:pt-24 lg:pb-16" id="hero-section">
+  <div class="hero-badge flex flex-col sm:flex-row items-center gap-2 sm:gap-3 border border-base-300 rounded-full px-3 sm:pl-3.5 sm:pr-2.5 py-2 mb-6 lg:mb-8 w-full sm:w-auto">
+    <span class="badge badge-primary bg-accent text-white border-0 rounded-full px-2 py-0.5 text-[11px] font-medium">Phase 0</span>
+    <span class="text-xs sm:text-[13px] text-base-content flex-1 sm:flex-none text-left sm:text-center">
+      <span class="hidden sm:inline">Software backbone is live · Inner Speech EEG</span>
+      <span class="sm:hidden">Software backbone is live</span>
+    </span>
+    <img src="{% static 'img/icon-play.svg' %}" alt="" class="hidden sm:block w-[22px] h-[22px] shrink-0" width="22" height="22">
+  </div>
+
+  <div class="hero-headline max-w-[920px]">
+    <h1 class="text-[36px] leading-[44px] lg:text-[64px] lg:leading-[72px] font-medium text-base-content">
+      <span class="hero-line block">Inner speech, measured</span>
+      <span class="hero-line block">from the outside.</span>
+    </h1>
+    <div class="hero-underline hidden lg:block bg-accent h-1 rounded-sm w-[280px] mx-auto mt-1.5"></div>
+    <div class="hero-underline lg:hidden bg-accent h-[3px] rounded-sm w-full mt-3"></div>
+  </div>
+
+  <p class="hero-copy mt-6 lg:mt-8 text-base lg:text-lg leading-6 lg:leading-7 text-base-content/60 max-w-[720px]">
+    NORT is a research project for non-invasive EEG+sEMG acquisition and speech decoding. The long-term vision is communication for people who cannot speak. Today we publish methods, not medical claims.
+  </p>
+
+  <div class="hero-actions flex flex-col sm:flex-row gap-3 lg:gap-4 mt-6 lg:mt-8 w-full sm:w-auto">
+    <a href="{% url 'blog:list' %}" class="btn btn-primary rounded-full px-5 lg:px-[22px] py-3.5 min-h-0 h-auto text-[15px] font-medium w-full sm:w-auto">Read the updates</a>
+    <a href="{% url 'collaborate:index' %}" class="btn bg-base-200 hover:bg-base-300 border-0 rounded-full px-5 lg:px-[22px] py-3.5 min-h-0 h-auto text-[15px] font-medium w-full sm:w-auto">Collaborate</a>
+  </div>
+</section>
+
+<section class="page-container pb-4 lg:pb-8 lg:pt-16">
+  <div class="stats-panel bg-base-200 rounded-2xl grid grid-cols-1 lg:grid-cols-3 overflow-hidden">
+    <div class="stat-item flex flex-col items-center justify-center gap-2 lg:gap-4 px-4 py-5 lg:px-6 lg:py-8 text-center">
+      <p class="text-2xl lg:text-[40px] font-medium">Phase 0</p>
+      <p class="text-[13px] lg:text-sm text-base-content/60">Reproducible decoding on open Inner Speech EEG</p>
+    </div>
+    <div class="stat-item flex flex-col items-center justify-center gap-2 lg:gap-4 px-4 py-5 lg:px-6 lg:py-8 text-center">
+      <p class="text-2xl lg:text-[40px] font-medium">Phase 1</p>
+      <p class="text-[13px] lg:text-sm text-base-content/60">Single-pod temple / ear wearable for EEG+sEMG</p>
+    </div>
+    <div class="stat-item flex flex-col items-center justify-center gap-2 lg:gap-4 px-4 py-5 lg:px-6 lg:py-8 text-center">
+      <p class="text-2xl lg:text-[40px] font-medium">Open logs</p>
+      <p class="text-[13px] lg:text-sm text-base-content/60">Every method choice is written down, including misses</p>
+    </div>
+  </div>
+</section>
+
+<section class="page-container py-8 lg:py-16 flex flex-col gap-6 lg:gap-8">
+  <div class="max-w-[1120px] w-full mx-auto">
+    <h2 class="text-[28px] lg:text-[36px] font-medium">How the work is structured</h2>
+    <p class="mt-3 text-[15px] lg:text-base text-base-content/60 max-w-[720px]">
+      Two tracks, one constraint: stay non-invasive until signal quality is proven on the bench.
+    </p>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 max-w-[1120px] w-full mx-auto">
+    <article class="approach-card card bg-base-100 border border-base-300 rounded-2xl p-5 lg:p-7">
+      <p class="section-label">Software</p>
+      <h3 class="mt-4 text-xl lg:text-[22px] font-medium">Decode first, offline</h3>
+      <p class="mt-4 text-sm leading-[22px] text-base-content/60">Phase 0 trains classical and deep models on the Nieto Inner Speech EEG set. Splits are subject-wise. TribeV2 is assessed, not assumed.</p>
+    </article>
+    <article class="approach-card card bg-base-100 border border-base-300 rounded-2xl p-5 lg:p-7">
+      <p class="section-label">Hardware</p>
+      <h3 class="mt-4 text-xl lg:text-[22px] font-medium">One temple pod</h3>
+      <p class="mt-4 text-sm leading-[22px] text-base-content/60">Phase 1 is a research instrument: 4–6 hydrogel contacts, EEG-class AFE, BLE timestamps, and a charging case. No stimulation. No charging while worn.</p>
+    </article>
+    <article class="approach-card card bg-base-100 border border-base-300 rounded-2xl p-5 lg:p-7">
+      <p class="section-label">Boundary</p>
+      <h3 class="mt-4 text-xl lg:text-[22px] font-medium">Non-invasive, explicit</h3>
+      <p class="mt-4 text-sm leading-[22px] text-base-content/60">Invasive speech BCIs can work. NORT stays outside the skull. ALS communication is the north star, not a current product claim.</p>
+    </article>
+  </div>
+</section>
+
+<section class="page-container py-8 lg:py-16 flex flex-col gap-6 lg:gap-8">
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 max-w-[1120px] w-full mx-auto">
+    <h2 class="text-[28px] lg:text-[36px] font-medium">Latest from the lab</h2>
+    <a href="{% url 'blog:list' %}" class="text-sm font-medium hover:underline">All posts →</a>
+  </div>
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 max-w-[1120px] w-full mx-auto" id="home-news-grid">
+    {% for post in latest_posts %}
+      <a href="{{ post.get_absolute_url }}" class="news-card card bg-base-100 border border-base-300 rounded-2xl p-5 lg:p-6 hover:border-base-content/20 transition-colors">
+        <p class="text-xs text-base-content/60">{{ post.published_at|date:"M j, Y" }} · {{ post.category_label }}</p>
+        <h3 class="mt-3 text-lg font-medium leading-6 lg:leading-[26px]">{{ post.title }}</h3>
+        <p class="mt-3 text-sm leading-[22px] text-base-content/60">{{ post.excerpt }}</p>
+      </a>
+    {% empty %}
+      <p class="text-base-content/60 col-span-full">Lab notes will appear here once published in the admin.</p>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-container py-8 lg:py-16">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 max-w-[1120px] mx-auto">
+    <article class="cta-card card bg-base-100 border border-base-300 rounded-2xl px-5 py-6 lg:px-9 lg:py-10 flex flex-col gap-4 lg:gap-6">
+      <h2 class="text-[22px] lg:text-[28px] font-medium">Follow the work</h2>
+      <p class="text-sm lg:text-[15px] leading-6 text-base-content/60">Lab notes, method comparisons, and hardware gates — published as they happen. No press theater.</p>
+      <a href="{% url 'blog:list' %}" class="btn bg-base-200 hover:bg-base-300 border-0 rounded-full px-[18px] py-3 min-h-0 h-auto w-full sm:w-fit text-sm font-medium">Open the blog</a>
+    </article>
+    <article class="cta-card card bg-neutral text-primary-content rounded-2xl px-5 py-6 lg:px-9 lg:py-10 flex flex-col gap-4 lg:gap-6">
+      <h2 class="text-[22px] lg:text-[28px] font-medium">Build with us</h2>
+      <p class="text-sm lg:text-[15px] leading-6 text-base-300">Signal processing, hardware, ethics, or datasets. Tell us how you want to help. We reply to serious notes.</p>
+      <a href="{% url 'collaborate:index' %}" class="btn bg-base-100 text-base-content hover:bg-base-200 border-0 rounded-full px-[18px] py-3 min-h-0 h-auto w-full sm:w-fit text-sm font-medium">Start a conversation</a>
+    </article>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/animations/home.js' %}"></script>
+{% endblock %}

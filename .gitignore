@@ -1,4 +1,6 @@
 .venv/
+website/node_modules/
+website/db.sqlite3
 __pycache__/
 *.pyc
 .DS_Store

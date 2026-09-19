@@ -1,0 +1,41 @@
+{% load static %}
+<footer class="{% if not mobile_menu %}border-t border-base-300{% endif %} bg-base-100">
+  <div class="page-container py-8 lg:py-16 flex flex-col gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-8 w-full">
+      <div class="flex flex-col gap-3">
+        <img src="{% static 'img/logo-lockup.svg' %}" alt="NORT Project" class="w-[72px] h-[72px] lg:w-[88px] lg:h-[88px]" width="88" height="88">
+        <p class="text-[13px] leading-5 text-base-content/60 max-w-xs">
+          Non-invasive research toward neural speech. Not a medical device.
+        </p>
+      </div>
+
+      <div class="flex flex-col gap-2.5 lg:gap-4 text-[13px]">
+        <p class="font-medium text-base-content">Project</p>
+        <a href="{% url 'core:home' %}" class="text-base-content/60 hover:text-base-content">Home</a>
+        <a href="{% url 'blog:list' %}" class="text-base-content/60 hover:text-base-content">Blog</a>
+        <a href="{% url 'collaborate:index' %}" class="text-base-content/60 hover:text-base-content">Collaborate</a>
+      </div>
+
+      <div class="flex flex-col gap-2.5 lg:gap-4 text-[13px]">
+        <p class="font-medium text-base-content">Research</p>
+        <span class="text-base-content/60">Phase 0 · Software</span>
+        <span class="text-base-content/60">Phase 1 · Wearable</span>
+        <a href="{% url 'blog:list' %}" class="text-base-content/60 hover:text-base-content">Open logs</a>
+      </div>
+
+      <div class="flex flex-col gap-2.5 lg:gap-4 text-[13px]">
+        <p class="font-medium text-base-content">Legal</p>
+        <span class="text-base-content/60">Research disclaimer</span>
+        <span class="text-base-content/60">Privacy</span>
+        <a href="{% url 'collaborate:index' %}" class="text-base-content/60 hover:text-base-content">Contact</a>
+      </div>
+    </div>
+
+    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 text-[12px] text-base-content/60">
+      <p>© 2026 NORT. Research only.</p>
+      {% if not mobile_menu %}
+      <p>Django · HTMX · Alpine.js · DaisyUI</p>
+      {% endif %}
+    </div>
+  </div>
+</footer>

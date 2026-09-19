@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Lab notes — NORT Project{% endblock %}
+{% block meta_description %}Project updates, method comparisons, and hardware gates from the NORT research lab.{% endblock %}
+
+{% block content %}
+<section class="page-container pt-7 pb-4 lg:pt-[72px] lg:pb-8">
+  <div class="max-w-content w-full">
+    <h1 class="text-[40px] lg:text-[56px] font-medium leading-none">Lab notes</h1>
+    <p class="mt-3 text-base lg:text-lg leading-6 lg:leading-7 text-base-content/60 max-w-[720px]">
+      Project updates, method comparisons, and hardware gates. Written for researchers who want the trail, not the press release.
+    </p>
+  </div>
+</section>
+
+<section class="page-container py-2 lg:py-2">
+  <div class="max-w-content w-full flex flex-wrap gap-2 lg:gap-3" id="blog-filters">
+    <a href="{% url 'blog:list' %}?category=all" class="btn btn-sm rounded-full px-3.5 py-2 min-h-0 h-auto text-[13px] font-medium {% if category == 'all' %}btn-primary{% else %}bg-base-200 border-0 hover:bg-base-300{% endif %}">All</a>
+    {% for value, label in categories %}
+      <a href="{% url 'blog:list' %}?category={{ value }}" class="btn btn-sm rounded-full px-3.5 py-2 min-h-0 h-auto text-[13px] font-medium {% if category == value %}btn-primary{% else %}bg-base-200 border-0 hover:bg-base-300{% endif %}">{{ label }}</a>
+    {% endfor %}
+  </div>
+</section>
+
+<section class="page-container pb-8 lg:pb-16 pt-2" id="blog-posts">
+  {% include "blog/partials/post_list.html" %}
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/animations/blog.js' %}"></script>
+{% endblock %}

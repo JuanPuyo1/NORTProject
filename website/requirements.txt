@@ -1,0 +1,4 @@
+django>=6.1,<7
+django-htmx>=1.29
+markdown>=3.10
+pillow>=12.0

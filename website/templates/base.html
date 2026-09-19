@@ -1,0 +1,32 @@
+{% load static django_htmx %}
+<!DOCTYPE html>
+<html lang="en" data-theme="nort">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}NORT Project{% endblock %}</title>
+  <meta name="description" content="{% block meta_description %}Non-invasive research toward neural speech. NORT publishes methods, not medical claims.{% endblock %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% htmx_script %}
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.9/dist/cdn.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  {% block extra_head %}{% endblock %}
+</head>
+<body class="min-h-screen flex flex-col" x-data="{ menuOpen: false }" @keydown.escape.window="menuOpen = false">
+  {% include "components/header.html" %}
+  {% include "components/mobile_menu.html" %}
+
+  <main class="flex-1">
+    {% block content %}{% endblock %}
+  </main>
+
+  {% include "components/footer.html" %}
+
+  <script src="{% static 'js/components/mobile-menu.js' %}"></script>
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

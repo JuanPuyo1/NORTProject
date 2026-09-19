@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.title }} — NORT Lab notes{% endblock %}
+{% block meta_description %}{{ post.excerpt }}{% endblock %}
+
+{% block content %}
+<article class="page-container py-8 lg:py-16 max-w-[820px]">
+  <a href="{% url 'blog:list' %}" class="text-sm text-base-content/60 hover:text-base-content">← All lab notes</a>
+
+  <div class="mt-6 flex items-center gap-2">
+    <time datetime="{{ post.published_at|date:'c' }}" class="text-xs text-base-content/60">{{ post.published_at|date:"M j, Y" }}</time>
+    <span class="badge bg-base-200 border-0 rounded-full px-2.5 py-1 text-[11px] font-medium text-base-content/60">{{ post.category_label }}</span>
+  </div>
+
+  <h1 class="mt-4 text-[32px] lg:text-[48px] font-medium leading-tight">{{ post.title }}</h1>
+
+  <div class="prose-lab mt-8 lg:mt-10 text-[15px] lg:text-base leading-7">
+    {{ content_html|safe }}
+  </div>
+</article>
+{% endblock %}

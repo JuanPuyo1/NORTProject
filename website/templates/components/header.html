@@ -1,0 +1,29 @@
+{% load static %}
+<header class="sticky top-0 z-40 bg-base-100 border-b border-transparent">
+  <div class="page-container flex items-center justify-between py-3.5 lg:py-5">
+    <a href="{% url 'core:home' %}" class="shrink-0" aria-label="NORT home">
+      <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-8 w-auto lg:h-10" width="42" height="40">
+    </a>
+
+    <nav class="hidden lg:flex items-center gap-4" aria-label="Main">
+      <a href="{% url 'core:home' %}" class="nav-link {% if request.resolver_match.url_name == 'home' and request.resolver_match.namespace == 'core' %}nav-link-active{% else %}nav-link-inactive{% endif %}">Home</a>
+      <a href="{% url 'blog:list' %}" class="nav-link {% if request.resolver_match.namespace == 'blog' %}nav-link-active{% else %}nav-link-inactive{% endif %}">Blog</a>
+      <a href="{% url 'collaborate:index' %}" class="nav-link {% if request.resolver_match.namespace == 'collaborate' %}nav-link-active{% else %}nav-link-inactive{% endif %}">Collaborate</a>
+    </nav>
+
+    <a href="{% url 'collaborate:index' %}" class="hidden lg:inline-flex btn btn-primary rounded-full px-[18px] py-2.5 min-h-0 h-auto text-sm font-medium">
+      Get in touch
+    </a>
+
+    <button
+      type="button"
+      class="lg:hidden btn btn-circle btn-ghost bg-base-200 border-0 w-10 h-10 min-h-0"
+      @click="menuOpen = true"
+      aria-label="Open menu"
+      aria-expanded="false"
+      :aria-expanded="menuOpen"
+    >
+      <img src="{% static 'img/icon-menu.svg' %}" alt="" class="w-5 h-5" width="20" height="20">
+    </button>
+  </div>
+</header>

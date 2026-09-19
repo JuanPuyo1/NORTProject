@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Collaborate — NORT Project{% endblock %}
+{% block meta_description %}Reach the NORT team for research collaboration on neural decoding, wearable EEG, ethics, or open datasets.{% endblock %}
+
+{% block content %}
+<section class="page-container pt-7 pb-4 lg:pt-[72px] lg:pb-4">
+  <div class="max-w-content w-full">
+    <h1 class="text-[40px] lg:text-[56px] font-medium leading-none">Collaborate</h1>
+    <p class="mt-3 text-base lg:text-lg leading-6 lg:leading-7 text-base-content/60 max-w-[720px]">
+      If you work on neural decoding, wearable EEG, ethics, or open datasets, write once. We read everything that is specific.
+    </p>
+  </div>
+</section>
+
+<section class="page-container pb-10 lg:pb-20 pt-4 lg:pt-8">
+  <div class="max-w-content w-full grid grid-cols-1 lg:grid-cols-[420px_1fr] gap-8 lg:gap-16">
+    <div class="collab-copy flex flex-col gap-6 lg:gap-8">
+      <h2 class="text-2xl lg:text-[28px] font-medium">What we need</h2>
+
+      <div>
+        <h3 class="font-medium text-base">Signal people</h3>
+        <p class="mt-1.5 text-sm leading-[22px] text-base-content/60">EEG, sEMG, CSP/Riemannian methods, and careful claims about inner speech.</p>
+      </div>
+      <div>
+        <h3 class="font-medium text-base">Hardware people</h3>
+        <p class="mt-1.5 text-sm leading-[22px] text-base-content/60">Low-noise AFE, BLE streaming, skin-safe electrodes, charging interlocks.</p>
+      </div>
+      <div>
+        <h3 class="font-medium text-base">Process people</h3>
+        <p class="mt-1.5 text-sm leading-[22px] text-base-content/60">Ethics, consent language, and logging so later work does not rewrite history.</p>
+      </div>
+
+      <div class="alert bg-base-200 border-0 rounded-2xl p-4 text-[13px]">
+        <div>
+          <p class="font-medium">Not recruiting patients</p>
+          <p class="mt-1.5 leading-5 text-base-content/60">This form is for research collaboration. NORT is not a clinic and does not enroll people with ALS in this phase.</p>
+        </div>
+      </div>
+    </div>
+
+    <div id="collaborate-form-panel" class="collab-form card bg-base-100 border border-base-300 rounded-2xl p-4 lg:p-8">
+      <form
+        method="post"
+        hx-post="{% url 'collaborate:index' %}"
+        hx-target="#collaborate-form-panel"
+        hx-swap="innerHTML"
+        class="flex flex-col gap-4"
+      >
+        {% csrf_token %}
+
+        {% for field in form %}
+          <div class="form-control w-full {% if field.name == 'consent_given' %}flex flex-row items-start gap-3{% endif %}">
+            {% if field.name != 'consent_given' %}
+              <label class="label py-0 mb-2" for="{{ field.id_for_label }}">
+                <span class="label-text text-[13px] font-medium">{{ field.label }}</span>
+              </label>
+            {% endif %}
+            {{ field }}
+            {% if field.name == 'consent_given' %}
+              <label for="{{ field.id_for_label }}" class="text-xs leading-[18px] text-base-content/60 cursor-pointer">
+                I understand this is research contact, not medical support, and NORT may store this message to reply.
+              </label>
+            {% endif %}
+            {% if field.errors %}
+              <p class="text-error text-xs mt-1">{{ field.errors|striptags }}</p>
+            {% endif %}
+          </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary rounded-full w-full py-3.5 min-h-0 h-auto text-[15px] font-medium mt-2">
+          Send note
+        </button>
+        <p class="text-xs text-base-content/60">We reply to the address you give. No mailing list.</p>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/animations/collaborate.js' %}"></script>
+{% endblock %}
