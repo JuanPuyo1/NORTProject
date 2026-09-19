@@ -2,6 +2,7 @@
 website/.env
 website/node_modules/
 website/db.sqlite3
+website/staticfiles/
 __pycache__/
 *.pyc
 .DS_Store

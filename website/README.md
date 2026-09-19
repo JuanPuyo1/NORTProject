@@ -46,3 +46,43 @@ Collaboration form submissions appear under **Collaboration inquiries** and trig
 | `GOOGLE_ANALYTICS_ID` | e.g. `G-9K7QWGXXGM`; leave empty locally to disable tracking |
 
 Without SMTP credentials, emails print to the console instead of sending.
+
+## Docker
+
+Build and run locally (uses PostgreSQL in Docker; SQLite is still used when `POSTGRES_HOST` is unset):
+
+```bash
+cd website
+copy .env.example .env
+docker compose up --build
+```
+
+Build a Linux image from Windows or macOS (for a VPS on `linux/amd64`):
+
+```bash
+cd website
+docker buildx build --platform linux/amd64 -t nort-website:local .
+```
+
+Production on the VPS (pull image from Docker Hub):
+
+```bash
+cd website
+docker compose -f docker-compose.prod.yml pull
+docker compose -f docker-compose.prod.yml up -d
+docker compose -f docker-compose.prod.yml exec web python manage.py createsuperuser
+```
+
+Set `DOCKER_IMAGE=yourdockerhubuser/nort-website:latest` in `.env` on the server.
+
+### GitHub Actions
+
+Add repository secrets:
+
+- `DOCKERHUB_USERNAME`
+- `DOCKERHUB_TOKEN` (Docker Hub access token)
+
+Pushes to `main` that touch `website/` build and push:
+
+- `yourdockerhubuser/nort-website:latest`
+- `yourdockerhubuser/nort-website:<git-sha>`
