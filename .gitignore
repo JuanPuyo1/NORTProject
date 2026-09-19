@@ -7,3 +7,5 @@ projects/Inner_Speech_Dataset/
 projects/tribev2/
 results/phase-0/runs/
 .matplotlib/
+projects/Rethinking-Methods-Inner-Speech/
+*.crdownload
