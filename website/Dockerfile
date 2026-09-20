@@ -5,9 +5,10 @@ FROM node:22-alpine AS assets
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm ci
+RUN npm ci --ignore-scripts
 
 COPY tailwind.config.js postcss.config.js ./
+COPY scripts ./scripts
 COPY static ./static
 RUN npm run build
 
