@@ -8,6 +8,7 @@ COPY package.json package-lock.json ./
 RUN npm ci --ignore-scripts
 
 COPY tailwind.config.js postcss.config.js ./
+COPY templates ./templates
 COPY scripts ./scripts
 COPY static ./static
 RUN npm run build
