@@ -2,40 +2,42 @@
 <div
   x-show="menuOpen"
   x-cloak
-  class="fixed inset-0 z-50 lg:hidden"
+  x-transition:enter="transition ease-out duration-300"
+  x-transition:enter-start="opacity-0"
+  x-transition:enter-end="opacity-100"
+  x-transition:leave="transition ease-in duration-200"
+  x-transition:leave-start="opacity-100"
+  x-transition:leave-end="opacity-0"
+  class="fixed inset-0 z-50 lg:hidden bg-base-100 flex flex-col overflow-y-auto"
   role="dialog"
   aria-modal="true"
   aria-label="Navigation menu"
 >
-  <div class="absolute inset-0 bg-base-100" @click="menuOpen = false"></div>
+  <div class="page-container flex items-center justify-between py-3.5 shrink-0">
+    <a href="{% url 'core:home' %}" @click="menuOpen = false">
+      <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-8 w-auto" width="42" height="40">
+    </a>
+    <button
+      type="button"
+      class="btn btn-circle btn-ghost bg-base-200 border-0 w-10 h-10 min-h-0"
+      @click="menuOpen = false"
+      aria-label="Close menu"
+    >
+      <img src="{% static 'img/icon-close.svg' %}" alt="" class="w-5 h-5" width="20" height="20">
+    </button>
+  </div>
 
-  <div class="relative h-full flex flex-col overflow-y-auto" id="mobile-menu-panel">
-    <div class="page-container flex items-center justify-between py-3.5">
-      <a href="{% url 'core:home' %}" @click="menuOpen = false">
-        <img src="{% static 'img/logo-mark.svg' %}" alt="" class="h-8 w-auto" width="42" height="40">
-      </a>
-      <button
-        type="button"
-        class="btn btn-circle btn-ghost bg-base-200 border-0 w-10 h-10 min-h-0"
-        @click="menuOpen = false"
-        aria-label="Close menu"
-      >
-        <img src="{% static 'img/icon-close.svg' %}" alt="" class="w-5 h-5" width="20" height="20">
-      </button>
-    </div>
+  <div class="page-container pb-10 pt-4 flex flex-col gap-2 flex-1">
+    <p class="text-[11px] text-base-content/60 mb-1">Menu</p>
+    <a href="{% url 'core:home' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] font-medium text-base-content">Home</a>
+    <a href="{% url 'blog:list' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] text-base-content/60">Blog</a>
+    <a href="{% url 'collaborate:index' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] text-base-content/60">Collaborate</a>
+    <a href="{% url 'collaborate:index' %}" @click="menuOpen = false" class="btn btn-primary rounded-full w-full mt-4 py-3.5 min-h-0 h-auto text-[15px] font-medium">
+      Get in touch
+    </a>
+  </div>
 
-    <div class="page-container pb-10 pt-4 flex flex-col gap-2">
-      <p class="text-[11px] text-base-content/60 mb-1">Menu</p>
-      <a href="{% url 'core:home' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] font-medium text-base-content">Home</a>
-      <a href="{% url 'blog:list' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] text-base-content/60">Blog</a>
-      <a href="{% url 'collaborate:index' %}" @click="menuOpen = false" class="py-3.5 pl-1 text-[22px] text-base-content/60">Collaborate</a>
-      <a href="{% url 'collaborate:index' %}" @click="menuOpen = false" class="btn btn-primary rounded-full w-full mt-4 py-3.5 min-h-0 h-auto text-[15px] font-medium">
-        Get in touch
-      </a>
-    </div>
-
-    <div class="mt-auto border-t border-base-300">
-      {% include "components/footer.html" with mobile_menu=True %}
-    </div>
+  <div class="mt-auto border-t border-base-300 shrink-0">
+    {% include "components/footer.html" with mobile_menu=True %}
   </div>
 </div>

@@ -25,7 +25,12 @@
   <script src="{% static 'js/vendor/ScrollTrigger.min.js' %}"></script>
   {% block extra_head %}{% endblock %}
 </head>
-<body class="min-h-screen flex flex-col" x-data="{ menuOpen: false }" @keydown.escape.window="menuOpen = false">
+<body
+  class="min-h-screen flex flex-col"
+  x-data="{ menuOpen: false }"
+  x-effect="document.body.classList.toggle('overflow-hidden', menuOpen)"
+  @keydown.escape.window="menuOpen = false"
+>
   {% include "components/header.html" %}
   {% include "components/mobile_menu.html" %}
 
@@ -35,7 +40,6 @@
 
   {% include "components/footer.html" %}
 
-  <script src="{% static 'js/components/mobile-menu.js' %}"></script>
   {% block extra_js %}{% endblock %}
 </body>
 </html>
